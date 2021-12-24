@@ -69,9 +69,13 @@ class PostController extends Controller
             ->with('success', 'Post updated successfully');
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        
+        $post = Post::findOrFail($id);
+        $post->delete();
+
+        return redirect()->route('posts.index')
+                        ->with('success','Post deleted successfully');
     }
 
     public function checkSlug(Request $request)
