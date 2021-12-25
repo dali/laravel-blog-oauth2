@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', "all posts") 
+@section('description', "all posts")
 
 @section('content')
 <div class="row justify-content-center">
@@ -23,7 +25,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">{{ __('title') }}</th>
-                    <th scope="col">{{ __('excerpt') }}</th>
+                    <th scope="col">{{ __('Image') }}</th>
                     <th scope="col">{{ __('published') }}</th>
                     <th scope="col">{{ __('publish_date') }}</th>
                     <th scope="col">{{ __('author') }}</th>
@@ -36,7 +38,7 @@
                             <tr>
                                 <th scope="row">{{ $post->id }} </th>
                                 <td>{{ $post->title }} </td>
-                                <td>{{ $post->excerpt }} </td>
+                                <td><img src="{{ $post->getFirstMediaUrl() }}" alt="" height="50"> </td>
                                 <td>{{ $post->published }} </td>
                                 <td>{{ $post->publish_date }} </td>
                                 <td>{{ $post->author->name }} </td>

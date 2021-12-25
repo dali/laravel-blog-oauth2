@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Support\Str;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Post extends Model
+class Post extends Model implements HasMedia
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, InteractsWithMedia;
     
 
     /**
@@ -19,7 +21,19 @@ class Post extends Model
      */
     protected $guarded = [];
 
-    protected $fillable = ['uuid', 'meta_title', 'meta_description', 'title', 'slug', 'excerpt', 'body', 'published', 'publish_date', 'author_id'];
+    protected $fillable = [
+        'uuid', 
+        'meta_title', 
+        'meta_description', 
+        'title', 
+        'image_url',
+        'slug', 
+        'excerpt', 
+        'body', 
+        'published', 
+        'publish_date', 
+        'author_id'
+    ];
 
     /**
      * The table associated with the model.

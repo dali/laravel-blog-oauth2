@@ -6,7 +6,7 @@
         <div class="col-md-10">
             <div class="card-header">{{ __('Edit post') }}</div>
             <div class="card-body">
-                <form method="POST" action="{{ route('posts.update', $post->id) }}">
+                <form method="post" action="{{ route('posts.update', $post->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="row mb-3">
@@ -44,6 +44,18 @@
                                 <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $post->title }}" required autocomplete="title" autofocus>
 
                                 @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="title" class="col-md-2 col-form-label text-md-end">{{ __('Upload Image') }}</label>
+
+                            <div class="col-md-8">
+                                <input class="form-control form-control @error('image_url') is-invalid @enderror" id="image_url" name="image_url" type="file">
+                                @error('image_url')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

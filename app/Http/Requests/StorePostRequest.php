@@ -27,6 +27,7 @@ class StorePostRequest extends FormRequest
             'meta_title' => 'required|max:60',
             'meta_description' => 'required|max:150',
             'title' => 'required|unique:posts|max:255',
+            'image_url' => 'required',
             'slug' => [
                 'required',
                 'alpha_dash',

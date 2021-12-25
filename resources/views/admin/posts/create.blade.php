@@ -6,7 +6,7 @@
         <div class="col-md-10">
             <div class="card-header">{{ __('Create a new post') }}</div>
             <div class="card-body">
-                <form method="POST" action="{{ route('posts.store') }}">
+                <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row mb-3">
                         <label for="meta_title" class="col-md-2 col-form-label text-md-end">{{ __('SEO title ') }}</label>
@@ -43,6 +43,18 @@
                                 <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
 
                                 @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="title" class="col-md-2 col-form-label text-md-end">{{ __('Upload Image') }}</label>
+
+                            <div class="col-md-8">
+                                <input class="form-control form-control @error('image_url') is-invalid @enderror" id="image_url" name="image_url" type="file">
+                                @error('image_url')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

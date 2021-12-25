@@ -38,7 +38,9 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $author = Auth::user();
+        $file = $request->file('image_url');
         $post = new Post($request->all());
+        $post->addMedia($file)->toMediaCollection();
         $post->author()->associate($author);
         $post->save();
 
@@ -62,9 +64,11 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, $id)
     {
+        $file = $request->file('image_url');
         $post = Post::findOrFail($id);
         $post->update($request->all());
-
+        $post->addMedia($file)->toMediaCollection();
+        
         return redirect()->route('posts.index')
             ->with('success', 'Post updated successfully');
     }
