@@ -31,18 +31,9 @@ Route::get('/sign-in/github', [SocialiteController::class, 'github']);
 
 Route::get('/sign-in/github/redirect', [SocialiteController::class, 'githubRedirect']);
 
-Route::group(['prefix' => 'admin'], function() {
-    
-    // Route::get('posts', [PostController::class, 'index'])->name('posts.index');
-    // Route::get('posts/create', [PostController::class, 'create']);
-    Route::get('posts/check_slug', [PostController::class, 'checkSlug'])->name('posts.checkSlug');
-    // Route::post('posts', [PostController::class, 'store'])->name('posts.store');
-    // Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
-    // Route::get('posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-    // Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update');
-    // Route::post('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
-
-Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
+Route::group(['prefix' => 'admin', 'as' => 'admin.',  'middleware' => 'auth'], function() {
+    Route::get('posts/check_slug', [\App\Http\Controllers\Admin\PostController::class, 'checkSlug'])->name('posts.checkSlug');
+    Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
 });
 
 //Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);

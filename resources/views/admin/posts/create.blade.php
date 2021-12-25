@@ -6,7 +6,7 @@
         <div class="col-md-10">
             <div class="card-header">{{ __('Create a new post') }}</div>
             <div class="card-body">
-                <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row mb-3">
                         <label for="meta_title" class="col-md-2 col-form-label text-md-end">{{ __('SEO title ') }}</label>
@@ -139,10 +139,15 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+
+
+
+@endsection
+
+@section('script')
 <script>
     $('#title').change(function(e){
-        $.get('{{ route('posts.checkSlug') }}',
+        $.get('{{ route('admin.posts.checkSlug') }}',
         { 'title': $(this).val() },
         function(data){
             $('#slug').val(data.slug);
@@ -150,4 +155,5 @@
         );
     });
 </script>
+    
 @endsection

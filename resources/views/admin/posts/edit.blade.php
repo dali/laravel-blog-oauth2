@@ -6,7 +6,7 @@
         <div class="col-md-10">
             <div class="card-header">{{ __('Edit post') }}</div>
             <div class="card-body">
-                <form method="post" action="{{ route('posts.update', $post->id) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('admin.posts.update', $post) }}" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="row mb-3">
@@ -54,7 +54,8 @@
                             <label for="title" class="col-md-2 col-form-label text-md-end">{{ __('Upload Image') }}</label>
 
                             <div class="col-md-8">
-                                <input class="form-control form-control @error('image_url') is-invalid @enderror" id="image_url" name="image_url" type="file">
+                                <input class="form-control form-control @error('image_url') is-invalid @enderror" id="image_url" value="{{ $post->image }}" name="image_url" type="file">
+                                <img src="{{ $post->image }}" alt="">
                                 @error('image_url')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -145,10 +146,13 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+
+@endsection
+
+@section('script')
 <script>
     $('#title').change(function(e){
-        $.get('{{ route('posts.checkSlug') }}',
+        $.get('{{ route('admin.posts.checkSlug') }}',
         { 'title': $(this).val() },
         function(data){
             $('#slug').val(data.slug);
@@ -156,4 +160,5 @@
         );
     });
 </script>
+    
 @endsection

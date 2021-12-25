@@ -41,6 +41,7 @@ class UpdatePostRequest extends FormRequest
             'body' => 'required',
             'published' => 'boolean',
             'publish_date' => 'nullable|date',
+            'image_url' => '',
         ];
     }
 }

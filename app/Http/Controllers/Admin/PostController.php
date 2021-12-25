@@ -23,9 +23,9 @@ class PostController extends Controller
 
 
 
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::findOrFail($id);
+        
         return view('admin.posts.show', compact('post'));
     }
 
@@ -40,7 +40,10 @@ class PostController extends Controller
         $author = Auth::user();
         $file = $request->file('image_url');
         $post = new Post($request->all());
-        $post->addMedia($file)->toMediaCollection();
+        if($request->hasFile('image_url')){
+            $post->addMedia($file)->toMediaCollection();
+        }
+       
         $post->author()->associate($author);
         $post->save();
 
@@ -49,10 +52,9 @@ class PostController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $post = Post::findOrFail($id);
-        return view('admin.posts.edit', ['post' => $post]);
+        return view('admin.posts.edit', compact('post'));
     }
 
      /**
@@ -62,20 +64,20 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePostRequest $request, $id)
+    public function update(UpdatePostRequest $request, Post $post)
     {
         $file = $request->file('image_url');
-        $post = Post::findOrFail($id);
         $post->update($request->all());
-        $post->addMedia($file)->toMediaCollection();
-        
+        if($request->hasFile('image_url')){
+            $post->addMedia($file)->toMediaCollection();
+        }
+
         return redirect()->route('posts.index')
             ->with('success', 'Post updated successfully');
     }
 
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
         $post->delete();
 
         return redirect()->route('posts.index')
