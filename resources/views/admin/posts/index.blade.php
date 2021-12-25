@@ -38,7 +38,7 @@
                             <tr>
                                 <th scope="row">{{ $post->id }} </th>
                                 <td>{{ $post->title }} </td>
-                                <td><img src="{{ $post->getFirstMediaUrl() }}" alt="" height="50"> </td>
+                                <td><img src="{{ $post->image }}" alt="" > </td>
                                 <td>{{ $post->published }} </td>
                                 <td>{{ $post->publish_date }} </td>
                                 <td>{{ $post->author->name }} </td>
