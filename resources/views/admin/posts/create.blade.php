@@ -79,7 +79,11 @@
 
                             <div class="col-md-8">
                                 
-                                <textarea class="form-control @error('excerpt') is-invalid @enderror" id="validationTextarea" name="excerpt" value="{{ old('excerpt') }}" placeholder="Description for the post" required autocomplete="excerpt" autofocus></textarea>
+                                <textarea class="form-control @error('excerpt') is-invalid @enderror" 
+                                          id="validationTextarea" 
+                                          name="excerpt" 
+                                          placeholder="Description for the post" 
+                                          required> {{ old('excerpt') }}</textarea>
                                 @error('excerpt')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -92,7 +96,14 @@
                             <label for="body" class="col-md-2 col-form-label text-md-end">{{ __('body') }}</label>
 
                             <div class="col-md-8">
-                                <textarea rows="10"  class="form-control @error('body') is-invalid @enderror" id="validationTextarea" name="body" value="{{ old('body') }}" placeholder="Body of the post"  autocomplete="body" autofocus></textarea>
+                                <textarea rows="10"  
+                                          class="form-control @error('body') is-invalid @enderror" 
+                                          id="validationTextarea" 
+                                          name="body"
+                                          placeholder="Body of the post"  
+                                          required>
+                                          {{ old('body') }}
+                                        </textarea>
                                 @error('body')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -100,7 +111,19 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <div class="row mb-3">
+                                <label for="tags" class="col-md-2 col-form-label text-md-end">Tags</label>
+                                @if ($tags->count() > 0)
+                                    <div class="col-md-8">
+                                            <select name="tags[]" id="tags" multiple="" class="form-control">
+                                                @foreach ($tags as $tag)
+                                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                                @endforeach
+                                                
+                                            </select>
+                                        </div>
+                                @endif
+                        </div>
                         <div class="row mb-3">
                             <div class="col-md-8 offset-md-2">
                                 <div class="form-check">

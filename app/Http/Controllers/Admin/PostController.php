@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,22 +34,25 @@ class PostController extends Controller
 
     public function create()
     {
-       return view('admin.posts.create');
+       $tags = Tag::all();
+       return view('admin.posts.create')->with('tags', $tags);
     }
 
-    public function store(StorePostRequest $request)
+    public function store(StorePostRequest $request, Post $post)
     {
         $author = Auth::user();
+        $author->posts()
+               ->create($request->all())
+               ->tags()
+               ->attach($request->tags);
+        
         $file = $request->file('image_url');
-        $post = new Post($request->all());
-        if($request->hasFile('image_url')){
-            $post->addMedia($file)->toMediaCollection();
+        if($request->hasFile('image_url') && $file->isValid()){
+            $author->posts->last()->addMedia($file)->toMediaCollection();
         }
        
-        $post->author()->associate($author);
-        $post->save();
-
-        return redirect()->route('posts.index')->withStatus(__('Post successfully created.'));
+        return redirect()->route('admin.posts.index')
+                         ->withStatus(__('Post successfully created.'));
 
     }
 
@@ -72,7 +77,7 @@ class PostController extends Controller
             $post->addMedia($file)->toMediaCollection();
         }
 
-        return redirect()->route('admin.posts.show')
+        return redirect()->route('admin.posts.index')
             ->with('success', 'Post updated successfully');
     }
 

@@ -37,7 +37,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.',  'middleware' => 'auth'], f
     
     Route::get('tags/check_slug', [\App\Http\Controllers\Admin\TagController::class, 'checkSlug'])->name('tags.checkSlug');
     Route::resource('tags', \App\Http\Controllers\Admin\TagController::class);
-
+    
     Route::get('categories/check_slug', [\App\Http\Controllers\Admin\CategoryController::class, 'checkSlug'])->name('categories.checkSlug');
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
     

@@ -33,7 +33,7 @@ class Post extends Model implements HasMedia
         'body', 
         'published', 
         'publish_date', 
-        'author_id'
+        // 'author_id'
     ];
 
     /**
@@ -68,7 +68,7 @@ class Post extends Model implements HasMedia
      */
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'posts_has_tags', 'post_id', 'tag_id');
     }
 
 
@@ -120,4 +120,5 @@ class Post extends Model implements HasMedia
               ->width(150)
               ->height(100);
     }
+
 }
