@@ -38,7 +38,7 @@ class PostController extends Controller
        return view('admin.posts.create')->with('tags', $tags);
     }
 
-    public function store(StorePostRequest $request, Post $post)
+    public function store(StorePostRequest $request)
     {
         $author = Auth::user();
         $author->posts()
