@@ -72,7 +72,7 @@ class PostController extends Controller
             $post->addMedia($file)->toMediaCollection();
         }
 
-        return redirect()->route('posts.index')
+        return redirect()->route('admin.posts.show')
             ->with('success', 'Post updated successfully');
     }
 
@@ -80,7 +80,7 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return redirect()->route('posts.index')
+        return redirect()->route('admin.posts.index')
                         ->with('success','Post deleted successfully');
     }
 

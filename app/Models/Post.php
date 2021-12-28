@@ -68,7 +68,18 @@ class Post extends Model implements HasMedia
      */
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'posts_tags', 'post_id', 'tag_id');
+        return $this->belongsToMany(Tag::class);
+    }
+
+
+    /**
+     * The tags the post belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 
     /**

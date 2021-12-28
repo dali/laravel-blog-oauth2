@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', "all posts") 
-@section('description', "all posts")
+@section('title', "all tags") 
+@section('description', "all tags")
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -30,7 +30,7 @@
                       <h3 class="card-title">Responsive Hover Table</h3>
                       
                       <div class="card-tools">
-                        <a class="btn btn-success" href="{{ route('admin.posts.create') }}"> create new post</a>
+                        <a class="btn btn-success" href="{{ route('admin.tags.create') }}"> create new tag</a>
                         {{-- <div class="input-group input-group-sm" style="width: 150px;">
                           <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
       
@@ -49,31 +49,20 @@
                       <table class="table table-hover text-nowrap">
                         <thead>
                           <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">{{ __('title') }}</th>
-                            <th scope="col">{{ __('Image') }}</th>
-                            <th scope="col">{{ __('published') }}</th>
-                            <th scope="col">{{ __('publish_date') }}</th>
-                            <th scope="col">{{ __('author') }}</th>
+                            <th scope="col">{{ __('Name') }}</th>
+                            <th scope="col">{{ __('Slug') }}</th>
                             <th scope="col">{{ __('Action') }}</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @if ($posts->count())
-                            @foreach ($posts as $post)
+                            @if ($tags->count())
+                            @foreach ($tags as $tag)
                                 <tr>
-                                    <th scope="row">{{ $post->id }} </th>
-                                    <td>{{ $post->title }} </td>
-                                    <td><img src="{{ $post->image }}" alt="" > </td>
-                                    <td>{{ $post->published }} </td>
-                                    <td>{{ $post->publish_date }} </td>
-                                    <td>{{ $post->author->name }} </td>
+                                    <th scope="row">{{ $tag->name }} </th>
+                                    <td>{{ $tag->slug }} </td>
                                     <td colspan="6">
-                                        {{-- <a class="btn btn-sm btn-outline-secondary" href="{{ route('posts.show',$post->id) }}">Show</a>
-                                        <a class="btn btn-sm btn-outline-secondary" href="{{ route('posts.edit',$post->id) }}">Edit</a> --}}
-                                        <form action="{{ route('admin.posts.destroy', $post) }}" method="POST" style="inline-block">   
-                                            <a class="btn btn-info" href="{{ route('admin.posts.show', $post) }}">Show</a>    
-                                            <a class="btn btn-primary" href="{{ route('admin.posts.edit', $post) }}">Edit</a>   
+                                        <form action="{{ route('admin.tags.destroy', $tag) }}" method="POST" style="inline-block">     
+                                            <a class="btn btn-primary" href="{{ route('admin.tags.edit', $tag) }}">Edit</a>   
                                             @csrf
                                             @method('DELETE')      
                                             <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</button>
@@ -82,18 +71,18 @@
                                 </tr>
                             @endforeach
                         @else
-                            <tr>
-                              <td>There is no posts</td>
-                            </tr>
+                        <tr>
+                          <td>There is no tags</td>
+                        </tr>
                         @endif
                         </tbody>
                       </table>
                       
                     </div>
                     <!-- /.card-body -->
-                    <div class="card-footer clearfix">
-                        {!! $posts->links() !!}
-                      </div>
+                    {{-- <div class="card-footer clearfix">
+                        {!! $tags->links() !!}
+                      </div> --}}
                   </div>
                   <!-- /.card -->
                 </div>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Tag extends Model
+class Category extends Model
 {
     use HasFactory, Sluggable;
 
@@ -15,7 +15,7 @@ class Tag extends Model
      *
      * @var string
      */
-    protected $table = 'tags';
+    protected $table = 'categories';
 
     protected $fillable = ['slug','name'];
 
@@ -40,4 +40,6 @@ class Tag extends Model
     {
         return $this->belongsToMany(Post::class);
     }
+
+    
 }
