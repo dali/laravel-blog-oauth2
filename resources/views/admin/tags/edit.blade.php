@@ -6,6 +6,7 @@
         <div class="col-md-10">
             <div class="card-header">{{ __('Edit tag') }}</div>
             <div class="card-body">
+                @include('partials.errors')
                 <form method="post" action="{{ route('admin.tags.update', $tag) }}">
                     @csrf
                     @method('put')
@@ -41,7 +42,7 @@
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-2">
                                 <button type="submit" class="btn btn-success">
-                                    {{ __('Submit') }}
+                                    {{ __('Update') }}
                                 </button>
                             </div>
                             

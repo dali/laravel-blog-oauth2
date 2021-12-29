@@ -11,6 +11,10 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    require('admin-lte');
+
+    $('.select2').select2();
+    $('.datepicker').datepicker();
 } catch (e) {
 }
 

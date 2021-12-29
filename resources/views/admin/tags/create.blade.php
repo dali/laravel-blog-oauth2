@@ -6,6 +6,7 @@
         <div class="col-md-10">
             <div class="card-header">{{ __('Create a new tag') }}</div>
             <div class="card-body">
+                @include('partials.errors')
                 <form method="POST" action="{{ route('admin.tags.store') }}">
                     @csrf
                     <div class="row mb-3">
@@ -21,6 +22,7 @@
                             @enderror
                         </div>
                     </div>
+
                         <div class="row mb-3">
                             <label for="slug" class="col-md-2 col-form-label text-md-end">{{ __('Slug') }}</label>
 

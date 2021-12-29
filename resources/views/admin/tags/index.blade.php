@@ -51,6 +51,7 @@
                           <tr>
                             <th scope="col">{{ __('Name') }}</th>
                             <th scope="col">{{ __('Slug') }}</th>
+                            <th scope="col">{{ __('Post count') }}</th>
                             <th scope="col">{{ __('Action') }}</th>
                           </tr>
                         </thead>
@@ -60,6 +61,7 @@
                                 <tr>
                                     <th scope="row">{{ $tag->name }} </th>
                                     <td>{{ $tag->slug }} </td>
+                                    <td>{{ $tag->posts->count() }} </td>
                                     <td colspan="6">
                                         <form action="{{ route('admin.tags.destroy', $tag) }}" method="POST" style="inline-block">     
                                             <a class="btn btn-primary" href="{{ route('admin.tags.edit', $tag) }}">Edit</a>   

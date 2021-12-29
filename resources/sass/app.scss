@@ -1,5 +1,43 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
+
+// FontAwesome
+$fa-font-path:"../webfonts";
+
+
+
+
 // Variables
 @import 'variables';
 
-// Bootstrap
-@import '~admin-lte/build/scss/adminlte';
+// Bootsrap
+@import '~bootstrap/scss/bootstrap';
+
+
+// AdminLTE
+
+
+
+@import "~admin-lte/plugins/select2/css/select2.min.css";
+@import "~admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css";
+@import "~admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css";
+@import "~admin-lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css";
+@import "~admin-lte/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css";
+@import "~admin-lte/dist/css/adminlte.css";
+
+
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+// @import "~@fortawesome/fontawesome-free./scss/brands.scss";
+
+
+.card-header,.card-footer{
+    background-color: transparent;
+}
+
+
+
+// @import '~jquery-ui/themes/base/all.css';
+
+

@@ -10,19 +10,11 @@
     <title> @yield('title') </title>
     <meta name="description" content="@yield('description')">
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <!-- Google Font: Source Sans Pro -->
-  
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Styles -->
-    <link href="{{ asset('css/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
     <div class="wrapper">
     
       <!-- Preloader -->
@@ -46,11 +38,12 @@
 
    
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <script src="{{ mix('js/popper.js') }}"></script> --}}
     @yield('script')
 
     
 
-    </div>
+    
 </body>
 </html>

@@ -27,7 +27,7 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title">Responsive Hover Table</h3>
+                      <h3 class="card-title">{{ __('Categories') }}</h3>
                       
                       <div class="card-tools">
                         <a class="btn btn-success" href="{{ route('admin.categories.create') }}"> create new category</a>
@@ -51,15 +51,17 @@
                           <tr>
                             <th scope="col">{{ __('Name') }}</th>
                             <th scope="col">{{ __('Slug') }}</th>
+                            <th scope="col">{{ __('Post count') }}</th>
                             <th scope="col">{{ __('Action') }}</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @if ($categories->count())
+                            @if ($categories->count() > 0)
                             @foreach ($categories as $category)
                                 <tr>
                                     <th scope="row">{{ $category->name }} </th>
                                     <td>{{ $category->slug }} </td>
+                                    <td>{{ $category->posts->count() }} </td>
                                     <td colspan="6">
                                         <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" style="inline-block">     
                                             <a class="btn btn-primary" href="{{ route('admin.categories.edit', $category) }}">Edit</a>   

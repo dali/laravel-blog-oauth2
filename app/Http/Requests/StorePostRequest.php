@@ -35,6 +35,7 @@ class StorePostRequest extends FormRequest
             ],
             'excerpt' => 'required',
             'body' => 'required',
+            'category_id' => 'required',
             'published' => 'boolean',
             'publish_date' => 'nullable|date',
         ];

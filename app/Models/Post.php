@@ -33,7 +33,8 @@ class Post extends Model implements HasMedia
         'body', 
         'published', 
         'publish_date', 
-        // 'author_id'
+        'author_id',
+        'category_id'
     ];
 
     /**
@@ -75,11 +76,11 @@ class Post extends Model implements HasMedia
     /**
      * The tags the post belongs to.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     /**
@@ -119,6 +120,12 @@ class Post extends Model implements HasMedia
         $this->addMediaConversion('thumb')
               ->width(150)
               ->height(100);
+    }
+
+
+    public function hasTag($tagId)
+    {
+        return in_array($tagId, $this->tags->pluck('id')->toArray());
     }
 
 }

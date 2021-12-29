@@ -6,6 +6,7 @@
         <div class="col-md-10">
             <div class="card-header">{{ __('Edit post') }}</div>
             <div class="card-body">
+                @include('partials.errors')
                 <form method="post" action="{{ route('admin.posts.update', $post) }}" enctype="multipart/form-data">
                     @csrf
                     @method('put')
@@ -108,6 +109,47 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="tags" class="col-md-2 col-form-label text-md-end">Tags</label>
+                            @if ($tags->count() > 0)
+                                <div class="col-md-8">
+                                        <select name="tags[]" id="tags" multiple="" class="form-control">
+                                            @foreach ($tags as $tag)
+                                                <option value="{{ $tag->id }}"
+                                                    @if(isset($post))
+                                                        @if ($post->hasTag($tag->id))
+                                                            selected
+                                                        @endif
+                                                    @endif
+                                                    
+                                                    >{{ $tag->name }}</option>
+                                            @endforeach
+                                            
+                                        </select>
+                                    </div>
+                            @endif
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="category" class="col-md-2 col-form-label text-md-end">Category</label>
+                            <div class="col-md-8">
+                                    @if ($tags->count() > 0)
+                                            <select name="category_id" id="category" 
+                                                    class="select2" 
+                                                    style="width: 100%;">
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}"
+                                                        @if ($post->category($category->id))
+                                                            selected
+                                                        @endif
+                                                        >{{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+                                       
+                                    @endif
+                            </div>
+                                
+                        </div>
+                        <div class="row mb-3">
                             <div class="col-md-8 offset-md-2">
                                 <div class="form-check">
                                     <input type="hidden" name="published" value="0">
@@ -135,7 +177,7 @@
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-2">
                                 <button type="submit" class="btn btn-success">
-                                    {{ __('Submit') }}
+                                    {{ __('Update') }}
                                 </button>
                             </div>
                             

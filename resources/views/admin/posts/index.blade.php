@@ -20,7 +20,7 @@
         </div><!-- /.container-fluid -->
       </div>
               <!-- /.row -->
-</section>
+
 <section class="content">
     <div class="container-fluid">      
         <div class="row">
@@ -45,27 +45,36 @@
                       </div>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
-                      <table class="table table-hover text-nowrap">
+                    <div class="card-body">
+                      <table class="table table-bordered">
                         <thead>
                           <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">{{ __('title') }}</th>
-                            <th scope="col">{{ __('Image') }}</th>
-                            <th scope="col">{{ __('published') }}</th>
-                            <th scope="col">{{ __('publish_date') }}</th>
-                            <th scope="col">{{ __('author') }}</th>
-                            <th scope="col">{{ __('Action') }}</th>
+                            <th>#</th>
+                            <th>{{ __('title') }}</th>
+                            <th>{{ __('Image') }}</th>
+                            <th>{{ __('published') }}</th>
+                            <th>{{ __('category') }}</th>
+                            <th>{{ __('publish_date') }}</th>
+                            <th>{{ __('author') }}</th>
+                            <th>{{ __('Action') }}</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @if ($posts->count())
+                            @if ($posts->count() > 0)
                             @foreach ($posts as $post)
+                            @can('view-post', $post)
+                              
+                           
                                 <tr>
                                     <th scope="row">{{ $post->id }} </th>
                                     <td>{{ $post->title }} </td>
                                     <td><img src="{{ $post->image }}" alt="" > </td>
                                     <td>{{ $post->published }} </td>
+                                    <td>
+                                      @if (isset($post->category))
+                                        {{ $post->category->name }}
+                                       @endif 
+                                    </td>
                                     <td>{{ $post->publish_date }} </td>
                                     <td>{{ $post->author->name }} </td>
                                     <td colspan="6">
@@ -80,6 +89,7 @@
                                         </form>
                                     </td>
                                 </tr>
+                              @endcan
                             @endforeach
                         @else
                             <tr>
