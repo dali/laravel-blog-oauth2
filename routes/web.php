@@ -40,6 +40,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.',  'middleware' => 'auth'], f
     
     Route::get('categories/check_slug', [\App\Http\Controllers\Admin\CategoryController::class, 'checkSlug'])->name('categories.checkSlug');
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     
 });
 

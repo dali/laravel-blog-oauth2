@@ -37,6 +37,11 @@ class Post extends Model implements HasMedia
         'category_id'
     ];
 
+
+    public const ROLE_USER = 1;
+    public const ROLE_ADMIN = 2;
+    public const ROLE_EDITOR = 3;
+
     /**
      * The table associated with the model.
      *

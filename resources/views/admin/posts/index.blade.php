@@ -81,8 +81,11 @@
                                         {{-- <a class="btn btn-sm btn-outline-secondary" href="{{ route('posts.show',$post->id) }}">Show</a>
                                         <a class="btn btn-sm btn-outline-secondary" href="{{ route('posts.edit',$post->id) }}">Edit</a> --}}
                                         <form action="{{ route('admin.posts.destroy', $post) }}" method="POST" style="inline-block">   
-                                            <a class="btn btn-info" href="{{ route('admin.posts.show', $post) }}">Show</a>    
-                                            <a class="btn btn-primary" href="{{ route('admin.posts.edit', $post) }}">Edit</a>   
+                                            <a class="btn btn-info" href="{{ route('admin.posts.show', $post) }}">Show</a>
+                                            @if (Auth::user()->can('update', $post))
+                                              <a class="btn btn-primary" href="{{ route('admin.posts.edit', $post) }}">Edit</a> 
+                                            @endif    
+                                              
                                             @csrf
                                             @method('DELETE')      
                                             <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</button>

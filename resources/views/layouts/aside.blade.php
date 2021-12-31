@@ -13,7 +13,8 @@
           <img src="{{ asset('/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          {{-- <a href="#" class="d-block"> {{ Auth::user()->name }}</a> --}}
+          
         </div>
       </div>
 
@@ -45,8 +46,17 @@
 
           </li>
           <li class="nav-item">
+            <a href="{{ route('admin.users.index') }}" class="nav-link">
+              <i class="fas fa-users"></i>
+              <p>
+                Users
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('admin.posts.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="fas fa-newspaper"></i>
               <p>
                 Posts
                 <span class="right badge badge-danger">New</span>
@@ -55,7 +65,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('admin.tags.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="fas fa-tags"></i>
               <p>
                 Tags
                 <span class="right badge badge-danger">New</span>
@@ -64,22 +74,14 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('admin.categories.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="fas fa-grip-vertical"></i>
               <p>
                 Categories
                 <span class="right badge badge-danger">New</span>
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Users
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
+
           <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -89,6 +91,19 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+             <a class="nav-link" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <p>{{ __('Logout') }}</p>
+             </a>
+
+           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+            </form>
+            
+        </li>
 
 
         </ul>

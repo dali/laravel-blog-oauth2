@@ -20,10 +20,16 @@ class PostController extends Controller
 {
     
 
+    public function __construct()
+    {
+        $this->authorizeResource(Post::class, 'post');
+    }
+
     public function index()
     {
         
-        $posts = Post::paginate(5);
+        // $posts = Post::paginate(5);
+        $posts = auth()->user()->posts()->paginate(5);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -31,7 +37,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        $this->authorize('view-post', $post);
+        // Gate::authorize('view-post', $post);
         return view('admin.posts.show', compact('post'));
     }
 
@@ -68,7 +74,7 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        $this->authorize('update-post', $post);
+        // $this->authorize('update-post', $post);
 
         return view('admin.posts.edit')->with('post', $post)
                                        ->with('categories', Category::all())
@@ -85,9 +91,9 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post)
     {
 
-        if (! Gate::allows('update-post', $post)) {
-            abort(403);
-        }
+        // if (! Gate::allows('update-post', $post)) {
+        //     abort(403);
+        // }
 
         $file = $request->file('image_url');
         $post->update($request->all());
